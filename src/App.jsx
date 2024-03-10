@@ -6,11 +6,14 @@ export default function App(){
   const [showStart,setShowStart] = useState(true);
   const [items,setItems] = useState(new Set());
   const [gameOver,setGameOver] = useState(false);
-  const [highScore,setHighScore] = useState(0);
+  const [highScore,setHighScore] = useState(()=>localStorage.getItem("highscore")?Number(localStorage.getItem("highscore")):0);
 
   function updateScore(){
     setHighScore(items.size > highScore ? items.size : highScore);
   }
+  useEffect(()=>{
+    highScore > localStorage.getItem("highscore") && localStorage.setItem("highscore",highScore);
+  },[highScore])
 
   function pushItems(item){
     console.log({items,"has":items.has(item)})  

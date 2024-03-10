@@ -25,6 +25,15 @@ export default function Cards({ items, highScore, difficulty, pushItems }) {
   // Shuffled cards based on difficulty
   const shuffledCards = shuffle(Array.from(Array(10).keys()));
 
+  // State to keep track of which card has been clicked
+  const [clickedCard, setClickedCard] = useState(null);
+
+  // Function to handle card click
+  const handleCardClick = (name) => {
+    setClickedCard(name);
+    pushItems(name);
+  };
+
   return (
     <div>
       <h1>Cards: {difficulty}</h1>
@@ -39,10 +48,10 @@ export default function Cards({ items, highScore, difficulty, pushItems }) {
             transition={{ delay: index * 0.1, duration: 0.5, type: 'spring', stiffness: 100 }}
           >
             <Card
-              clickHandler={pushItems}
+              clickHandler={handleCardClick}
               name={number}
+              isFlipped={true}
               //backgroundUrl={`https://picsum.photos/seed/${Math.random()}/${number * 20}/${number * 50}?blur=5`}
-
             />
           </motion.div>
         ))}
