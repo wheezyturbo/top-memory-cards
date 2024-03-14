@@ -35,10 +35,20 @@ export default function Cards({ items, highScore, difficulty, pushItems }) {
   };
 
   return (
-    <div>
-      <h1>Cards: {difficulty}</h1>
-      <p>Current Score: {items.size}</p>
-      <p>High Score: {highScore}</p>
+    <div className="cards-container">
+      <div className="game-info">
+        <h1>Cards: {difficulty}</h1>
+        <div className="score-container">
+          <div className="score">
+            <span className="score-label">Current Score:</span>
+            <span className="score-value">{items.size}</span>
+          </div>
+          <div className="score">
+            <span className="score-label">High Score:</span>
+            <span className="score-value">{highScore}</span>
+          </div>
+        </div>
+      </div>
       <div className="cards-grid">
         {shuffledCards.map((number, index) => (
           <motion.div
