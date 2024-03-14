@@ -1,6 +1,7 @@
 .app {
-  width: 100vw;
-  height: 100vh;
+  position:relative;
+  width: auto;
+  height: auto;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -22,9 +23,12 @@
 
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjusted card size for better layout */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjusted card size for better layout */
   gap: 10px; /* Gap between cards */
   padding: 10px; /* Padding around the card grid */
+  width:80vw;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .card {
@@ -68,10 +72,41 @@ div.card-bg{
   background:url('card-background.png') !important;
 }
 
+.cards-grid div{
+  height:200px;
+}
 
-
-@media (max-width:480px){
+/*@media (max-width:939px){
   .cards-grid {
 	  grid-template-columns: repeat(3,1fr);
+    height:calc(100vh - 300px);
   }
+  .cards-grid div{
+    height:100%;
+  }
+}*/
+
+@media (max-width:1537px){
+  .cards-grid {
+    grid-template-columns:repeat(3,1fr);
+    height:calc(100vh - 300px);
+  }
+  .cards-grid div{
+    height:100%;
+  }
+}
+
+@media (max-width:480px){
+  .root{
+    height:80vh;
+  }
+  .start-menu p{
+    font-size:0.7rem;
+  }
+}
+
+.audio-btn{
+  position:fixed;
+  left:10px;
+  bottom:40px;
 }

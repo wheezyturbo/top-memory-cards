@@ -8,7 +8,7 @@ export default function Card({ name, clickHandler, backgroundUrl, isFlipped }) {
 
   return (
     <motion.div className="card" onClick={() => clickHandler(name)}
-    animate={{ rotateY: 180 }}
+    animate={{ rotateY: [180,0] }}
     transition={{ duration: 1 }}
     >
       <div
