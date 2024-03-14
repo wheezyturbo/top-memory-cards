@@ -5,6 +5,7 @@ import './App.css';
 import background from '/audio/background.mp3';
 import click from '/audio/click.mp3'
 import BackgroundAudioButton from './components/BackgroundAudioButton';
+import GameOverPopUp from './components/GameOverPopUp';
 
 export default function App(){
   const [showStart,setShowStart] = useState(true);
@@ -14,9 +15,12 @@ export default function App(){
   const [bgAudio] = useState(new Audio(background));
   const [clickAudio] = useState(new Audio(click));
   const [isBgPlaying,setIsBgPlaying] = useState(true);
+  const [retry,setRetry] = useState(false);
+  const [currentScore,setCurrentScore] = useState(0);
 
   function updateScore(){
     setHighScore(items.size > highScore ? items.size : highScore);
+    setCurrentScore(items.size);
   }
 
   useEffect(() => {
@@ -57,16 +61,24 @@ export default function App(){
   gameOver&&reset()
   function reset(){
     updateScore();
+    setRetry(true);
     setGameOver(false);
-    setItems(new Set());
+    !retry&&setItems(new Set());
     setShowStart(true);
   }
 
   function closeStart(){
     showStart&&setShowStart(false);
   }
+
+  function closeRetry(){
+    setItems(new Set());
+    setRetry(false);
+    setShowStart(false);
+  }
+
   return <div className="app">
-    {showStart?<StartMenu closeStart={closeStart}/>:<Cards items={items} highScore={highScore} difficulty={10} pushItems={pushItems}/>}
+    {showStart?!retry?<StartMenu closeStart={closeStart}/>:<GameOverPopUp items={currentScore} highScore={highScore} retryFn={closeRetry}/>:<Cards items={items} highScore={highScore} difficulty={10} pushItems={pushItems}/>}
     <BackgroundAudioButton isPlaying={isBgPlaying} stopMusic={stopPlaying} />
   </div>
 } 

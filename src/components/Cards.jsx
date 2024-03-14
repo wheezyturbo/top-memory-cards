@@ -23,7 +23,7 @@ export default function Cards({ items, highScore, difficulty, pushItems }) {
   };
 
   // Shuffled cards based on difficulty
-  const shuffledCards = shuffle(Array.from(Array(800).keys()));
+  const shuffledCards = shuffle(Array.from(Array(10).keys()));
 
   // State to keep track of which card has been clicked
   const [clickedCard, setClickedCard] = useState(null);
